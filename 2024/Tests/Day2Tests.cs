@@ -8,6 +8,16 @@ public class Day2Tests(ITestOutputHelper testOutputHelper)
     [Fact]
     public void Day2Part1Test()
     {
-        TestUtils.MeasureExecution(Day2.Part1, 10000, testOutputHelper);
+        var result = TestUtils.MeasureExecution(Day2.Part1, 10_000, testOutputHelper);
+
+        Assert.Equal(332, result);
+    }
+
+    [Fact]
+    public void Day2Part2Test()
+    {
+        var result = TestUtils.MeasureExecution(Day2.Part2, 10_000, testOutputHelper);
+        
+        Assert.Equal(398, result);
     }
 }

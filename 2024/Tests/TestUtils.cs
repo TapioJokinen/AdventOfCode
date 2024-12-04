@@ -5,7 +5,7 @@ namespace Tests;
 
 public static class TestUtils
 {
-    public static void MeasureExecution(Func<int> functionToTest, int iterations, ITestOutputHelper testOutputHelper)
+    public static int MeasureExecution(Func<int> functionToTest, int iterations, ITestOutputHelper testOutputHelper)
     {
         var elapsedList = new List<long>();
         var result = 0;
@@ -21,5 +21,7 @@ public static class TestUtils
 
         testOutputHelper.WriteLine("Result: " + result);
         testOutputHelper.WriteLine("Average elapsed: " + elapsedList.Average() + "µs");
+
+        return result;
     }
 }

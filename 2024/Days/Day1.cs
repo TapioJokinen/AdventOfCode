@@ -10,23 +10,24 @@ public static class Day1
 
         const short lineCount = 1000;
         const short bufferSize = 4096;
-        var sum = 0;
-        var index = 0;
-
-        var left = new int[lineCount];
-        var right = new int[lineCount];
 
         using var fileStream = File.OpenRead(filePath);
         using var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, bufferSize);
 
+        var left = new int[lineCount];
+        var right = new int[lineCount];
+
+        var sum = 0;
+        var index = 0;
+
         while (streamReader.ReadLine() is { } line)
         {
-            var strings = line.Split();
-            var leftNum = int.Parse(strings[0]);
-            var rightNum = int.Parse(strings[^1]);
+            var span = line.AsSpan();
+            var leftNumEnd = span.IndexOf(' ');
+            var rightNumStart = span.LastIndexOf(' ') + 1;
 
-            left[index] = leftNum;
-            right[index] = rightNum;
+            left[index] = int.Parse(span[..leftNumEnd]);
+            right[index] = int.Parse(span[rightNumStart..]);
             index++;
         }
 
@@ -45,23 +46,24 @@ public static class Day1
         const short lineCount = 1000;
         const short bufferSize = 4096;
 
+        using var fileStream = File.OpenRead(filePath);
+        using var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, bufferSize);
+
         var dict = new Dictionary<int, int>();
+
         var rightNums = new int[lineCount];
         var index = 0;
         var sum = 0;
 
-        using var fileStream = File.OpenRead(filePath);
-        using var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, bufferSize);
-
         while (streamReader.ReadLine() is { } line)
         {
-            var strings = line.Split();
-            var leftNum = int.Parse(strings[0]);
-            var rightNum = int.Parse(strings[^1]);
+            var span = line.AsSpan();
+            var leftNumEnd = span.IndexOf(' ');
+            var rightNumStart = span.LastIndexOf(' ') + 1;
 
-            dict.TryAdd(leftNum, 0);
+            dict.TryAdd(int.Parse(span[..leftNumEnd]), 0);
+            rightNums[index] = int.Parse(span[rightNumStart..]);
 
-            rightNums[index] = rightNum;
             index++;
         }
 
