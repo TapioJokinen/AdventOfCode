@@ -17,7 +17,7 @@ public class Day2Tests(ITestOutputHelper testOutputHelper)
     public void Day2Part2Test()
     {
         var result = TestUtils.MeasureExecution(Day2.Part2, 10_000, testOutputHelper);
-        
+
         Assert.Equal(398, result);
     }
 }
